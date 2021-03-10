@@ -1,0 +1,4 @@
+docker-compose.yml
+qrcode.png
+node_modules/*
+config.js
