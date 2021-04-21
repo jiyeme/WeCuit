@@ -3,24 +3,24 @@ const decodeImage = require("jimp").read;
 const qrcodeReader = require("qrcode-reader");
 qrDecode("qrcode.png", function (url) {
     console.log(url);
-    var http = require("http");
+    let http = require("http");
 
-    var qs = require("querystring");
+    let qs = require("querystring");
 
-    var data = {
+    let data = {
         url: url
     }; //这是需要提交的数据
 
-    var content = qs.stringify(data);
+    let content = qs.stringify(data);
 
-    var options = {
+    let options = {
         hostname: "cuit.api.jysafe.cn",
         port: 80,
         path: "/api/sys/qrCode/action/update/type/wx?" + content,
         method: "GET",
     };
 
-    var req = http.request(options, function (res) {
+    let req = http.request(options, function (res) {
         console.log("STATUS: " + res.statusCode);
         console.log("HEADERS: " + JSON.stringify(res.headers));
         res.setEncoding("utf8");

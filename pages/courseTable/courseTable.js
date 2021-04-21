@@ -343,6 +343,7 @@ Page({
    * 从服务器拉取课表数据
    */
   getCourseFromServer: function () {
+    // console.log(this.data.termArray[1][this.data.termIndex[1]])
     app.httpPost({
         url: '/Jwgl/getCourseTableV2/',
         data: {
