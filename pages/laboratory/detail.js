@@ -112,6 +112,7 @@ Page({
         ],
         Lb_index: 0,
         hideData: {},
+        heightData: [],
         retList: [],
     },
 
@@ -221,6 +222,7 @@ Page({
                 retList: res.data.list,
             });
             this.setData(res.data.form);
+            this.calAniHeight();
         });
     },
     showNotice: function (e) {
@@ -237,6 +239,24 @@ Page({
                 isShowNotice: false,
             });
         }, 500);
+    },
+    calAniHeight: function(){
+        console.log("calAniHeight");
+        let query = wx.createSelectorQuery();
+        for (let i = 0; i < Object.getOwnPropertyNames(this.data.retList).length; i++) {
+            console.log("calAniHeight-select");
+            query.select(`#card-body-${i}`).boundingClientRect();
+        }
+        console.log("calAniHeight1");
+        query.exec(ret => {
+            console.log(ret);
+            ret.forEach((v, i)=>{
+                this.data.heightData[i] = v.height + 'px';
+            })
+            this.setData({
+                heightData: this.data.heightData
+            })
+        })
     },
     hideAni: function (e) {
         console.log(e);

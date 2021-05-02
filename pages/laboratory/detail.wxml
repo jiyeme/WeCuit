@@ -94,7 +94,7 @@
                 <view >{{labDetail.getDay(index)}}</view>
                 <view bind:tap="hideAni" data-ele="{{index + 1}}" class="iconfont icon-{{!hideData['ele_' + (index+1)]?'shouqi':'zhankai'}}"></view>
             </view>
-            <view class="card-body {{hideData['ele_' + (index+1)]?'hide':'display'}}">
+            <view id="card-body-{{index}}" style="--card-height:{{heightData[index]?heightData[index]:'auto'}}" class="card-body {{hideData['ele_' + (index+1)]?'hide':'display'}}">
                 <view class="lesson">
                     <block wx:for="{{item}}" wx:key="index" wx:for-index="lesson_index" wx:for-item="lesson_item">
                         <view class="lesson__title" >{{lesson_index}}</view>

@@ -88,6 +88,7 @@ Page({
         ],
         cxXsms_index: 0,
         hideData: {},
+        heightData:[],
         retList: [],
     },
 
@@ -119,7 +120,8 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {},
+    onShow: function () {
+    },
 
     /**
      * 生命周期函数--监听页面隐藏
@@ -213,6 +215,21 @@ Page({
             hideData: this.data.hideData,
         });
     },
+    calAniHeight: function(){
+        let query = wx.createSelectorQuery();
+        for (let i = 0; i < this.data.retList.length; i++) {
+            query.select(`#card-body-${i}`).boundingClientRect();
+        }
+        query.exec(ret => {
+            console.log(ret);
+            ret.forEach((v, i)=>{
+                this.data.heightData[i] = v.height + 'px';
+            })
+            this.setData({
+                heightData: this.data.heightData
+            })
+        })
+    },
     bindinput: function (e) {
         // 微信端使用双向绑定更佳
         // console.log(e);
@@ -257,6 +274,7 @@ Page({
                 retList: res.data.list,
             });
             this.setData(res.data.form);
+            this.calAniHeight();
         });
     },
 });
