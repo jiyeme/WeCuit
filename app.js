@@ -3,6 +3,7 @@ const RSA = require("utils/rsa/wx_rsa.js");
 const config = require("config.js");
 const login = require("/utils/login/login");
 const log = require("utils/log");
+const request = require("utils/request");
 
 App({
     onLaunch: function (e) {
@@ -15,6 +16,7 @@ App({
         this.checkUpdate();
 
         this.loginClass = new login.DoLogin(this.globalData);
+        this.globalData.autoLoginProcess =  Promise.resolve()
         this.getUserInfo().then((res) => {
             if("string" != typeof res.openid){
                 wx.showToast({
@@ -31,90 +33,14 @@ App({
                 this.globalData.autoLoginProcess =  Promise.resolve()
                 console.log("未启用自动登录");
             }
+        }).catch(e=>{
         });
+        request.init(config.API_DOMAIN);
     },
 
-    baseUrl: config.API_DOMAIN,
-	/**
-	 * http请求封装
-	 * @param method 请求方法类型
-	 * @param url 请求路径
-	 * @param data 请求参数
-	 * @param loading 请求加载效果 {0: 正常加载, 1: 表单提交加载效果 }
-	 * @param loadingMsg 请求提示信息
-	 */
-	httpBase: function (method, url, data, loading, loadingMsg) {
-		let _this = this;
-        
-		let requestUrl = this.baseUrl + url;
-
-		if (loading) {
-			wx.showLoading({
-				title: loadingMsg || '提交中...',
-				mask: true
-			});
-		} else {
-			wx.showNavigationBarLoading()
-		}
-
-		function request(resolve, reject) {
-			wx.request({
-				header: {
-					'Content-Type': 'application/json'
-				},
-				method: method,
-				url: requestUrl,
-				data: data,
-				success: function (result) {
-					if (loading) {
-						wx.hideLoading();
-					} else {
-						wx.hideNavigationBarLoading()
-					}
-
-					let res = result.data || {};
-					let code = res.errorCode;
-
-					if (code !== 2000) {
-                        if(10503 === code){
-                            wx.reLaunch({
-                                url: `/pages/maintenance/maintenance?BText=${res.maintenance.BText}&OText=${res.maintenance.OText}`
-                              })
-                        }else
-						    reject(res);
-						if (res.errMsg) {
-							wx.showToast({
-								title: res.errMsg,
-								icon: 'none'
-							});
-						}
-					} else {
-						resolve(res);
-					}
-				},
-				fail: function (res) {
-					reject(res);
-					if (loading) {
-						wx.hideLoading();
-					} else {
-						wx.hideNavigationBarLoading()
-					}
-					wx.showToast({
-						title: '网络出错',
-						icon: 'none'
-					});
-				}
-			})
-		}
-
-		return new Promise(request);
-	},
-	httpGet: function ({url = "", data = {}, loading = false, loadingMsg = ""} = {}) {
-		return this.httpBase("GET", url, data, loading, loadingMsg);
-	},
-	httpPost: function ({url = "", data = {}, loading = false, loadingMsg = ""} = {}) {
-		return this.httpBase("POST", url, data, loading, loadingMsg);
-	},
+	httpGet: request.httpGetForm,
+	httpPost: request.httpPostForm,
+	httpPostJson: request.httpPostJson,
 
     // 小程序发生脚本错误或 API 调用报错时触发。
     onError: function (e) {

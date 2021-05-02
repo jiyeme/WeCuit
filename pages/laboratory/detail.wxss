@@ -25,6 +25,9 @@ page{
     --progress: 0%;
 }
 
+.hide {
+    display: none;
+}
 @keyframes showNotice{
     0%{
 	    color:rgba(255, 0, 0, 0)

@@ -11,8 +11,15 @@ page{
     padding: 10rpx;
     margin: 10rpx;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
-
+.display {
+    display: block;
+}
+.hide {
+    display: none;
+}
 .search > .title{
     display: flex;
     padding: 10rpx;
