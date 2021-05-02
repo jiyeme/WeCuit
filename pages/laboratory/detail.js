@@ -112,7 +112,7 @@ Page({
         ],
         Lb_index: 0,
         hideData: {},
-        heightData: [],
+        heightData: {},
         retList: [],
     },
 
@@ -243,15 +243,14 @@ Page({
     calAniHeight: function(){
         console.log("calAniHeight");
         let query = wx.createSelectorQuery();
-        for (let i = 0; i < Object.getOwnPropertyNames(this.data.retList).length; i++) {
-            console.log("calAniHeight-select");
-            query.select(`#card-body-${i}`).boundingClientRect();
+        for(let key in this.data.retList){
+            query.select(`#card-body-${key}`).boundingClientRect();
         }
         console.log("calAniHeight1");
         query.exec(ret => {
-            console.log(ret);
+            if(null == ret)return;
             ret.forEach((v, i)=>{
-                this.data.heightData[i] = v.height + 'px';
+                this.data.heightData[v.id] = v.height + 'px';
             })
             this.setData({
                 heightData: this.data.heightData
