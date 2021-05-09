@@ -134,7 +134,7 @@ Page({
     console.log(form);
     this.tempForm = form;
 
-    app.httpPost({
+    app.httpPostJson({
       url: '/Jszx/doCheckInV3/',
       data: {
         link: this.data.link,

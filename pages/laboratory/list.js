@@ -121,6 +121,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        this.doSubmit2();
     },
 
     /**
@@ -217,7 +218,7 @@ Page({
     },
     calAniHeight: function(){
         let query = wx.createSelectorQuery();
-        for (let i = 0; i < this.data.retList.length; i++) {
+        for (let i = 0; i <= this.data.retList.length; i++) {
             query.select(`#card-body-${i}`).boundingClientRect();
         }
         query.exec(ret => {

@@ -65,6 +65,12 @@
           "pathName": "pages/checkIn/list",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/laboratory/detail",
+          "pathName": "pages/laboratory/detail",
+          "query": "Yx=118&Lb=1",
+          "scene": null
         }
       ]
     }

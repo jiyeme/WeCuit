@@ -52,6 +52,12 @@ page{
 	    color:rgba(255,0,0,0)
     }
 }
+form{
+    display: block;
+}
+.hide .input-form{
+    border-top: none!important;
+}
 .input-form{
     display: flex;
     flex-wrap: wrap;

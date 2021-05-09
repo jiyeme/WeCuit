@@ -243,8 +243,9 @@ Page({
     calAniHeight: function(){
         console.log("calAniHeight");
         let query = wx.createSelectorQuery();
+        query.select(`#card-body-0`).boundingClientRect();
         for(let key in this.data.retList){
-            query.select(`#card-body-${key}`).boundingClientRect();
+            query.select(`#card-body-${1+key}`).boundingClientRect();
         }
         console.log("calAniHeight1");
         query.exec(ret => {

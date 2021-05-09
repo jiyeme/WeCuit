@@ -2,6 +2,7 @@ const RSA = require("../rsa/wx_rsa.js");
 const config = require("../../config.js");
 const log = require("../log");
 const XMLParser = require("../xmldom/dom-parser");
+const REQUEST = require("../request");
 const xmlParser = new XMLParser.DOMParser();
 var loginFailed = 0;
 // RSA加密
@@ -106,11 +107,12 @@ class LOGIN {
     httpPost({ url = "", data = {}, loading = false, loadingMsg = "" } = {}) {
         return this.httpBase("POST", url, data, loading, loadingMsg);
     }
+    
     ccDoLogin() {
         return this.httpPost({
             url: "/Jszx/loginRSAv1/",
             data: {
-                userId: RSAEncrypt(this.account.userId),
+                userId: this.account.userId,
                 userPass: RSAEncrypt(this.account.userPass),
             },
         }).then((data) => {
@@ -641,7 +643,7 @@ class LOGIN {
     }
 
     yktLogin() {
-        return this.httpPost({
+        return REQUEST.httpPostForm({
             url: "/Card/login",
             data: {
                 cookie: this.session.SSO_TGC,
