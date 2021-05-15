@@ -11,9 +11,21 @@ page{
     padding: 10rpx;
     margin: 10rpx;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
-
-.search > .title{
+.card-body{
+    min-height: 0;
+    transition: height .5s;
+    -webkit-transition: height .5s;
+}
+.display {
+    height: var(--card-height);
+}
+.hide {
+    height: 0px;
+}
+.search .title{
     display: flex;
     padding: 10rpx;
     justify-content: space-between;

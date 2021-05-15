@@ -112,6 +112,7 @@ Page({
         ],
         Lb_index: 0,
         hideData: {},
+        heightData: {},
         retList: [],
     },
 
@@ -134,7 +135,14 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {},
+    onReady: function () {
+        if("undefined" !== typeof qq && 1 === getCurrentPages().length)
+        {
+          this.setData({
+            fromShare: true
+          })
+        }
+    },
 
     /**
      * 生命周期函数--监听页面显示
@@ -214,6 +222,7 @@ Page({
                 retList: res.data.list,
             });
             this.setData(res.data.form);
+            this.calAniHeight();
         });
     },
     showNotice: function (e) {
@@ -230,6 +239,24 @@ Page({
                 isShowNotice: false,
             });
         }, 500);
+    },
+    calAniHeight: function(){
+        console.log("calAniHeight");
+        let query = wx.createSelectorQuery();
+        query.select(`#card-body-0`).boundingClientRect();
+        for(let key in this.data.retList){
+            query.select(`#card-body-${1+key}`).boundingClientRect();
+        }
+        console.log("calAniHeight1");
+        query.exec(ret => {
+            if(null == ret)return;
+            ret.forEach((v, i)=>{
+                this.data.heightData[v.id] = v.height + 'px';
+            })
+            this.setData({
+                heightData: this.data.heightData
+            })
+        })
     },
     hideAni: function (e) {
         console.log(e);

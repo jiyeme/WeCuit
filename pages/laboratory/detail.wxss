@@ -13,6 +13,17 @@ page{
     overflow: hidden;
 }
 
+.card-body{
+    transition: height .5s;
+    -webkit-transition: height .5s;
+}
+.display {
+    height: var(--card-height);
+}
+.hide {
+    height: 0px;
+}
+
 .search > .title{
     display: flex;
     padding: 10rpx;
@@ -40,6 +51,12 @@ page{
     to{
 	    color:rgba(255,0,0,0)
     }
+}
+form{
+    display: block;
+}
+.hide .input-form{
+    border-top: none!important;
 }
 .input-form{
     display: flex;
