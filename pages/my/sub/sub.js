@@ -168,11 +168,8 @@ Page({
                             this.data.tplList[j].subCnt = parseInt(
                                 sub[i].subCnt
                             );
-                            this.data.tplList[j].status = Boolean(
-                                parseInt(sub[i].status)
-                            );
-                            if (1 == this.data.tplList[j].status)
-                                delBtnDisabled = false;
+                            this.data.tplList[j].status = sub[i].status;
+                            delBtnDisabled = !this.data.tplList[j].status;
                         }
                     }
                 }

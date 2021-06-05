@@ -15,7 +15,7 @@ function genQuerySign(path, openid, str_data = ''){
         return 'false';
     }
     let md5 = UTIL.md5
-    return md5(md5(path) + md5(openid) + md5(str_data) + QUERY_SALT)
+    return md5(md5(path) + md5(openid) + md5('' + str_data) + QUERY_SALT)
 }
 
 module.exports={
