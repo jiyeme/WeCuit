@@ -22,7 +22,7 @@ Page({
         src: options.src
     });
     wx.showLoading({
-        title: '祈祷中~'
+        title: '请求中~'
     })
   },
   cropperLoad(e){

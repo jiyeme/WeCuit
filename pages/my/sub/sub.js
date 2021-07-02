@@ -98,7 +98,7 @@ Page({
         console.log(e);
         this.showConfirm(value)
             .then(() => {
-                wx.showLoading({ title: "祈祷中~" });
+                wx.showLoading({ title: "请求中~" });
                 app.httpPost({
                     url: "/Sub/changeStatusV2",
                     data: {
@@ -269,7 +269,7 @@ Page({
             }
         })
             .then((res) => {
-                wx.showLoading({ title: "祈祷中~" });
+                wx.showLoading({ title: "请求中~" });
                 app.httpPost({
                     url: "/Sub/addCntV2",
                     data: {
