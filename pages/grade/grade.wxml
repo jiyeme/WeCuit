@@ -11,10 +11,10 @@ module.exports = {
   isPass : isPass,
 }
 </wxs>
-<view style="display: flex;align-items: center;margin-bottom: 2rem;">
+<!-- <view style="display: flex;align-items: center;margin-bottom: 2rem;">
   <switch checked="{{isGradeSub}}" bindchange="changeSubStatus" disabled="{{!isSysSub}}"/><label style="{{!isSysSub?'color:red':''}}">{{isSysSub?'订阅成绩更新提醒':'如需提醒请先订阅'}}</label>
   <navigator url="/pages/my/sub/sub" ><button style="width: auto;font-size: small;left: 1rem;" type="primary">订阅管理</button></navigator>
-</view>
+</view> -->
 <view class="total_card" style="margin-bottom: 2rem;">
     <view >全部成绩</view>
     <view class="total_card_sub">

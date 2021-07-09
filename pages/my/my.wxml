@@ -17,11 +17,11 @@
 		<view>开源地址</view>
 		<view class="subicon-r iconfont icon-arr-right"></view>
 	</label>
-	<navigator url="/pages/my/sub/sub" class="label">
+	<!-- <navigator url="/pages/my/sub/sub" class="label">
 		<view class="subicon iconfont icon-dingyue"></view>
 		<view>订阅管理</view>
 		<view class="subicon-r iconfont icon-arr-right"></view>
-	</navigator>
+	</navigator> -->
 	<label class="label">
 		<view class="subicon iconfont icon-yijian" style="color:#1CBBB4"></view>
 		<button class="buttonFix" plain="true" open-type="feedback">意见反馈</button>

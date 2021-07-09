@@ -1,7 +1,7 @@
 {
-  "name": "cuit",
+  "name": "WeCuit",
   "version": "1.0.0",
-  "description": "CUIT TOOLS",
+  "description": "WeCuit",
   "main": "app.js",
   "dependencies": {
     "jimp": "^0.16.1",

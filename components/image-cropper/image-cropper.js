@@ -292,7 +292,7 @@ Component({
           const tempFilePaths = res.tempFilePaths[0];
           that.pushImg(tempFilePaths);
           wx.showLoading({
-            title: '祈祷中~'
+            title: '请求中~'
           })
         }
       })

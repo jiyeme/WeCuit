@@ -1,5 +1,5 @@
 <!-- pages/attendance/edit.wxml -->
-<mp-cells ext-class="my-cells" title="打卡操作">
+<!-- <mp-cells ext-class="my-cells" title="自动打卡操作">
   <view class="check-info">
   <picker mode="time" value="{{autoCheckIn.time}}" start="06:00" end="23:59" bindchange="bindAutoCheckInTime">
     {{autoCheckIn.time}}
@@ -25,7 +25,7 @@
     </navigator>
   </label>
   </view>
-</mp-cells>
+</mp-cells> -->
 <mp-cells ext-class="my-cells" title="打卡时间">
   <mp-cell ext-class="my-cell">
     <view>{{checkInTime}}</view>

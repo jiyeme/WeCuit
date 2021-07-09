@@ -69,7 +69,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getCheckInInfo()
+    // this.getCheckInInfo()
     this.getEditDetail().then(data => {
       wx.stopPullDownRefresh()
       wx.hideLoading()
@@ -134,7 +134,7 @@ Page({
     console.log(form);
     this.tempForm = form;
 
-    app.httpPost({
+    app.httpPostJson({
       url: '/Jszx/doCheckInV3/',
       data: {
         link: this.data.link,

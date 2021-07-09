@@ -15,13 +15,13 @@ Page({
     termArray: [
         [
           {
-            "name": "2020-2021"
+            "name": "202?-202?"
           }
         ],
         [
           {
-              "id": 302,
-              "name": "第1学期"
+              "id": 0,
+              "name": "第?学期"
           }
         ]
       ],
@@ -343,6 +343,7 @@ Page({
    * 从服务器拉取课表数据
    */
   getCourseFromServer: function () {
+    // console.log(this.data.termArray[1][this.data.termIndex[1]])
     app.httpPost({
         url: '/Jwgl/getCourseTableV2/',
         data: {
@@ -396,24 +397,27 @@ Page({
    */
   getOptions: function()
   {
+    let semesterId = this.data.termArray[1][this.data.termIndex[1]].id!==0?"semester.id=" + this.data.termArray[1][this.data.termIndex[1]].id + ";":"";
     app.httpPost({
         url: '/Jwgl/getCourseOption/',
         data: {
-          cookie: "semester.id=" + this.data.termArray[1][this.data.termIndex[1]].id + ";" + this.data.sessionInfo.JWGL_cookie + '; TWFID=' + this.data.sessionInfo.TWFID
+          cookie: `${semesterId}${this.data.sessionInfo.JWGL_cookie};TWFID=${this.data.sessionInfo.TWFID}`
         },
 
     }).then((res)=>{
-      var tempData = {}
-      var sem = res.semesters
+      let tempData = {}
+      let sem = res.semesters
       tempData['courseTypeArray'] = res.courseType
       tempData['courseWeekArray'] = res.courseWeek
       wx.setStorage({
         data: res.courseWeek,
         key: 'courseWeekArray',
       })
-      tempData['termArray'] = [sem.semesters[0]]
-      this.data.termData = sem.semesters[1]
-      tempData['termArray'][1] = this.data.termData[sem.yearIndex];
+      tempData['termArray'] = [sem.list[0]]
+      tempData['termArray'][1] = sem.list[1][sem.index[0]===-1?0:sem.index[0]];
+      if(sem.index[0] !== -1 && sem.index[1] !== -1)
+        tempData['termIndex'] = sem.index;
+      this.data.termData = sem.list[1]
       this.setData(tempData)
     }).catch((err)=>{
       this.handelERR(err)
@@ -482,7 +486,6 @@ Page({
     this.setData({
       termIndex: e.detail.value
     })
-    this.getOptions();
     this.bindLongTab();
   },
 
@@ -491,6 +494,8 @@ Page({
    * @param {*} e 
    */
   bindTermColumnChange: function (e) {
+    console.log(e)
+    console.log(this.data.termData)
     var data = {
       termArray: this.data.termArray,
       termIndex: this.data.termIndex

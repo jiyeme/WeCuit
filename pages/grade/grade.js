@@ -39,7 +39,7 @@ Page({
      */
     onShow: function () {
         app.globalData.autoLoginProcess.then(() => {
-            this.getExamSubStatus();
+            // this.getExamSubStatus();
             this.gradeQueryV2();
         });
     },
@@ -89,7 +89,7 @@ Page({
         };
     },
     gradeQueryV2: function () {
-        wx.showLoading({ title: "祈祷中~" });
+        wx.showLoading({ title: "请求中~" });
         app.httpPost({
             url: "/Jwgl/getGradeTableV2/",
             data: {
